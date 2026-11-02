@@ -1,7 +1,8 @@
+/// <reference types="google.maps" />
 "use client";
 
 import { useEffect, useRef } from "react";
-import { Loader } from "@googlemaps/js-api-loader";
+import { setOptions, importLibrary } from "@googlemaps/js-api-loader";
 
 interface MapProps {
   center: {
@@ -17,12 +18,15 @@ export function Map({ center, zoom = 11 }: MapProps) {
 
   useEffect(() => {
     const initMap = async () => {
-      const loader = new Loader({
-        apiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string,
-        version: "weekly",
+      setOptions({
+        key: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string,
+        v: "weekly",
       });
 
-      const { Map } = await loader.importLibrary("maps");
+      const { Map } = (await importLibrary("maps")) as google.maps.MapsLibrary;
+      const { Marker } = (await importLibrary(
+        "marker"
+      )) as google.maps.MarkerLibrary;
 
       if (mapRef.current && !mapInstanceRef.current) {
         mapInstanceRef.current = new Map(mapRef.current, {
@@ -48,11 +52,10 @@ export function Map({ center, zoom = 11 }: MapProps) {
         });
 
         // Add a marker for Pro-Vent Services
-        new google.maps.Marker({
+        new Marker({
           position: center,
           map: mapInstanceRef.current,
           title: "Pro-Vent Services",
-          animation: google.maps.Animation.DROP,
         });
       }
     };

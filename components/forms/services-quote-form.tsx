@@ -27,12 +27,8 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const formSchema = z.object({
-  serviceType: z.string({
-    required_error: "Please select a service type.",
-  }),
-  propertyType: z.string({
-    required_error: "Please select a property type.",
-  }),
+  serviceType: z.string().min(1, "Please select a service type."),
+  propertyType: z.string().min(1, "Please select a property type."),
   squareFootage: z.string().min(1, "Square footage is required"),
   numberOfVents: z.string().min(1, "Number of vents is required"),
   addOns: z.array(z.string()).optional(),

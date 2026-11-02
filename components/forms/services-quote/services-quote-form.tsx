@@ -1,6 +1,6 @@
 "use client";
 
-import { useForm } from "react-hook-form";
+import { useForm, type Resolver } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "motion/react";
 import { servicesQuoteSchema, type ServicesQuoteFormData } from "@/lib/schemas/services-quote";
@@ -93,7 +93,9 @@ export function ServicesQuoteForm({ onSuccess }: { onSuccess?: () => void }) {
   }, []);
 
   const form = useForm<ServicesQuoteFormData>({
-    resolver: zodResolver(servicesQuoteSchema),
+    resolver: zodResolver(
+      servicesQuoteSchema
+    ) as unknown as Resolver<ServicesQuoteFormData>,
     defaultValues: {
       furnaces: "1",
       buildingType: undefined,
@@ -679,7 +681,6 @@ export function ServicesQuoteForm({ onSuccess }: { onSuccess?: () => void }) {
                                 disabled={(date) =>
                                   date < new Date() || date < new Date("1900-01-01")
                                 }
-                                initialFocus
                               />
                             </div>
                             <div className="w-full md:w-[240px] p-4 h-[320px] md:h-[346px] overflow-y-auto">
