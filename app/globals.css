@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+@layer base {
+  :root {
+    --background: 210 33% 99%;
+    --foreground: 220 35% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 35% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 35% 11%;
+    --primary: 215 45% 33%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 35% 96%;
+    --secondary-foreground: 215 45% 28%;
+    --muted: 210 28% 95%;
+    --muted-foreground: 215 18% 42%;
+    --accent: 196 92% 44%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 215 25% 89%;
+    --input: 215 25% 89%;
+    --ring: 215 45% 33%;
+    --chart-1: 197 100% 50%;
+    --chart-2: 215 40% 45%;
+    --chart-3: 220 25% 30%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.875rem;
+  }
+  .dark {
+    --background: 222 32% 7%;
+    --foreground: 210 30% 98%;
+    --card: 222 28% 10%;
+    --card-foreground: 210 30% 98%;
+    --popover: 222 28% 10%;
+    --popover-foreground: 210 30% 98%;
+    --primary: 205 85% 60%;
+    --primary-foreground: 222 35% 8%;
+    --secondary: 218 28% 15%;
+    --secondary-foreground: 210 30% 98%;
+    --muted: 218 25% 14%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 195 90% 52%;
+    --accent-foreground: 222 35% 8%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 217 25% 18%;
+    --input: 217 25% 18%;
+    --ring: 205 85% 60%;
+    --chart-1: 197 100% 50%;
+    --chart-2: 210 60% 55%;
+    --chart-3: 220 20% 45%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased selection:bg-primary/20 selection:text-primary;
+  }
+}
+
+@layer utilities {
+  .bg-grid-pattern {
+    background-size: 36px 36px;
+    background-image: 
+      linear-gradient(to right, hsl(var(--border) / 0.35) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--border) / 0.35) 1px, transparent 1px);
+  }
+  .glass-panel {
+    @apply bg-card/80 backdrop-blur-xl border border-border/60 shadow-soft;
+  }
+}

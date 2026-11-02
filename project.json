@@ -1,0 +1,60 @@
+{
+  "name": "provent",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/provent",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/next:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/apps/provent"
+      },
+      "configurations": {
+        "development": {
+          "outputPath": "dist/apps/provent"
+        },
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/next:server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "provent:build",
+        "dev": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "provent:build:development",
+          "dev": true
+        },
+        "production": {
+          "buildTarget": "provent:build:production",
+          "dev": false
+        }
+      }
+    },
+    "start": {
+      "executor": "@nx/next:start",
+      "defaultConfiguration": "production",
+      "options": {
+        "buildTarget": "provent:build"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "provent:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/provent/**/*.{ts,tsx,js,jsx}"]
+      }
+    }
+  },
+  "tags": []
+}
